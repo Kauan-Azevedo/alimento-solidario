@@ -1,1 +1,7 @@
-export class CreateAlimentoDto {}
+export class CreateAlimentoDto {
+    nome: string;
+    quantidade: number;
+    vencimento: Date;
+    observacao?: string;
+
+}

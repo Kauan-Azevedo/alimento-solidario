@@ -5,7 +5,7 @@ import { UpdateAlimentoDto } from './dto/update-alimento.dto';
 
 @Controller('alimentos')
 export class AlimentosController {
-  constructor(private readonly alimentosService: AlimentosService) {}
+  constructor(private readonly alimentosService: AlimentosService) { }
 
   @Post()
   create(@Body() createAlimentoDto: CreateAlimentoDto) {
@@ -19,16 +19,16 @@ export class AlimentosController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.alimentosService.findOne(+id);
+    return this.alimentosService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAlimentoDto: UpdateAlimentoDto) {
-    return this.alimentosService.update(+id, updateAlimentoDto);
+    return this.alimentosService.update(id, updateAlimentoDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.alimentosService.remove(+id);
+    return this.alimentosService.remove(id);
   }
 }
