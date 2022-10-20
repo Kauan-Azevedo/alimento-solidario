@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Body, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -20,6 +20,10 @@ export class UserService {
     }
     const saveUser = new this.userModel(user)
     return saveUser.save();
+  }
+
+  findByEmail(@Body() email: string) {
+    return this.userModel.findOne({ email })
   }
 
   findAll() {
