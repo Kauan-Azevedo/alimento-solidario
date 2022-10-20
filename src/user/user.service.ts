@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
 import * as bcrypt from 'bcrypt'
+import { json } from 'stream/consumers';
 
 @Injectable()
 export class UserService {
@@ -23,7 +24,7 @@ export class UserService {
   }
 
   findByEmail(@Body() email: string) {
-    return this.userModel.findOne({ email })
+    return this.userModel.findOne({ email: JSON.stringify(email) })
   }
 
   findAll() {
