@@ -4,11 +4,13 @@ import { AppService } from './app.service';
 import { AlimentosModule } from './alimentos/alimentos.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config'
+import { OrganizationModule } from './organization/organization.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(process.env.MONGODB_URL),
-    AlimentosModule
+    AlimentosModule,
+    OrganizationModule
   ],
   controllers: [AppController],
   providers: [AppService],
