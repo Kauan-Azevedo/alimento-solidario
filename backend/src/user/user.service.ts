@@ -1,11 +1,10 @@
-import { Body, Injectable } from '@nestjs/common';
+import { Injectable, Param } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import * as bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
-import * as bcrypt from 'bcrypt'
-import { json } from 'stream/consumers';
 
 @Injectable()
 export class UserService {
@@ -17,14 +16,18 @@ export class UserService {
   async create(createUserDto: CreateUserDto) {
     const user = {
       ...createUserDto,
-      senha: await bcrypt.hash(createUserDto.senha, 10)
+      senha: await bcrypt.hash(createUserDto.senha, 15)
     }
     const saveUser = new this.userModel(user)
     return saveUser.save();
   }
 
-  findByEmail(@Body() email: string) {
-    return this.userModel.findOne({ email: JSON.stringify(email) })
+  findByEmail(@Param() email: string) {
+    return this.userModel.findOne(
+      {
+        email
+      }
+    )
   }
 
   findAll() {
